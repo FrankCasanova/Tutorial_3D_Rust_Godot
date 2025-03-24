@@ -1,3 +1,4 @@
+mod mob;
 use godot::prelude::*;
 
 mod player;

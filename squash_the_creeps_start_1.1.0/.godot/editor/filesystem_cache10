@@ -1,11 +1,11 @@
 ea4bc82a6ad023ab7ee23ee620429895
-::res://::1742763219
+::res://::1742853613
 default_bus_layout.tres::AudioBusLayout/AudioBusLayout::-1::1742737191::0::1::::<><><>0<>0<><>::
 default_env.tres::Environment/Environment::-1::1742737191::0::1::::<><><>0<>0<><>::
 icon.png::CompressedTexture2D/CompressedTexture2D::7164329318770678222::1606009720::1742737212::1::::<><><>0<>0<>e8f4f906b44b35f72d7dce5a70d52833<>res://.godot/imported/icon.png-487276ed1e3a0c39cad0279d744ee560.ctex::
-main.tscn::PackedScene::4684496590409923786::1742739630::0::1::::<><><>0<>0<><>::
-player.tscn::PackedScene::3884422346794255976::1742744352::0::1::::<><><>0<>0<><>::uid://ddyx1ju3dch3p::::res://art/player.glb
-RustScripts.gdextension::GDExtension::66723538550132756::1742739900::0::1::::<><><>0<>0<><>::
+main.tscn::PackedScene::4684496590409923786::1742773286::0::1::::<><><>0<>0<><>::uid://bvlv4saytitbk::::res://player.tscn
+player.tscn::PackedScene::3884422346794255976::1742773321::0::1::::<><><>0<>0<><>::uid://ddyx1ju3dch3p::::res://art/player.glb
+RustScripts.gdextension::GDExtension/GDExtension::66723538550132756::1742739900::0::1::::<><><>0<>0<><>::
 ::res://art/::1742737213
 body.material::StandardMaterial3D/StandardMaterial3D::-1::1605908508::0::1::::<><><>0<>0<><>::
 eye.material::StandardMaterial3D/StandardMaterial3D::-1::1606514142::0::1::::<><><>0<>0<><>::
