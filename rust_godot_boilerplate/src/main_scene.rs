@@ -42,20 +42,26 @@ impl MainScene {
     #[func]
     fn on_mob_timer_timeout(&mut self) {
         // Create mob instance
-        let mob_scene = self.mob_scene.instantiate_as::<CharacterBody3D>();
         // Get spawn location (fixed typo in variable name)
+
+        // var mob_spawn_location = get_node("SpawnPath/SpawnLocation")
         let mut mob_spawn_location = self.base().get_node_as::<PathFollow3D>("SpawnPath/SpawnLocation");
-        // Set random progress using proper thread_rng
+
+        // Set random progress using proper rng
+
+        // mob_spawn_location.progress_ratio = randf()
         mob_spawn_location.set_progress_ratio(rand::rng().random_range(0.0..=1.0));
-        // Get positions
-        let spawn_position = mob_spawn_location.get_position();
+
+        //var player_position = $Player.position
         let player_position = self.player.get_position();
-        // Initialize mob - need to cast to our Mob type
-        //its importat to bring the mob to the scene tree
-        //in other case u cant use its methods
-        let mut mob = mob_scene.cast::<mob::Mob>();
-        mob.bind_mut().initialize(spawn_position, player_position);
-        // Add to scene tree
+
+        // var mob = mob_scene.instantiate()
+        let mut mob = self.mob_scene.instantiate_as::<mob::Mob>();
+
+        // mob.initialize(mob_spawn_location.position, player_position)
+        mob.bind_mut().initialize(mob_spawn_location.get_position(), player_position);
+
+        // add_child(mob)
         self.base_mut().add_child(&mob);
     }
 }

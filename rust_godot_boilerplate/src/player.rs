@@ -26,7 +26,7 @@ impl ICharacterBody3D for Player {
         }
     }
 
-    fn process(&mut self, _delta: f64) {
+    fn physics_process(&mut self, _delta: f64) {
         /*Here, instead of _process(), we're going to make all 
         calculations using the _physics_process() virtual function. 
         It's designed specifically for physics-related code like 
