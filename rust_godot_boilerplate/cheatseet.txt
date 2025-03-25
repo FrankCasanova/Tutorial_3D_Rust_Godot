@@ -1,0 +1,26 @@
+There are some guidelines you can rely on (which you probably already know):
+For Godot-native methods
+There's no dynamic typing, so you need to cast your object to your desired type before attempting to call methods of that type on it.
+
+Const methods
+Calling can be done with either <&MyClass>::base().method() or <&Gd<MyClass>>::method().
+Both the godot documentation and the gdext-rust bindings specify which are const and which aren't, the gdext bindings specify that through method signatures (eg: fn get_position(&Node2D) vs fn add_child(&mut Node)).
+
+Non-const methods
+Calling can be done with either <&mut MyClass>::base_mut().method() or <&mut Gd<MyClass>::method().
+
+Additionally, you must acquire parameters from your object before calling the method.
+
+For User-made methods
+Calling can be done with either: 
+<&Gd<MyClass>>::bind().method()
+<&mut Gd<MyClass>>::bind_mut().method()
+<&MyClass>::method()
+<&mut MyClass>::method()
+
+<&Gd<MyClass>>::bind() returns a GdRef<MyClass> which implements Deref<Target = MyClass> , which means it's essentially a reference to your underlying object.
+
+<&mut Gd<MyClass>>::bind_mut() returns a GdMut<MyClass> which implements DerefMut<Target = MyClass> , which means it's essentially a mutable reference to your underlying object.
+
+Note that, the GdMut<MyClass> variable still needs to be declared as mut (the let mut bellow):
+let mut bind_mut = my_obj.bind_mut();

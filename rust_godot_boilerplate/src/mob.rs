@@ -37,8 +37,8 @@ impl Mob {
     }
 
     #[func]
-    fn initialize(&mut self, start_position: Vector3, player_position: Vector3) {
-        self.base_mut().look_at_from_position(player_position, start_position);
+    pub fn initialize(&mut self, start_position: Vector3, player_position: Vector3) {
+        self.base_mut().look_at_from_position(start_position, player_position);
         self.base_mut().rotate_y(rand::rng().random_range(-PI/4.0..PI/4.0));
         let random_speed = rand::rng().random_range(self.min_speed..self.max_speed);
         self.base_mut().set_velocity(Vector3::FORWARD * random_speed);
