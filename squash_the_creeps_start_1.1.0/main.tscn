@@ -26,6 +26,8 @@ point_count = 4
 
 [node name="Ground" type="StaticBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+collision_layer = 4
+collision_mask = 0
 metadata/_edit_group_ = true
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Ground"]
@@ -72,7 +74,7 @@ mesh = SubResource("CylinderMesh_0xm2m")
 curve = SubResource("Curve3D_ig7tw")
 
 [node name="SpawnLocation" type="PathFollow3D" parent="SpawnPath"]
-transform = Transform3D(0.033931, 0, -0.999424, 0, 1, 0, 0.999424, 0, 0.033931, -14.9857, 0, -14.0101)
+transform = Transform3D(0.0339328, 0, -0.999424, 0, 1, 0, 0.999424, 0, 0.0339328, -14.9857, 0, -14.0101)
 
 [node name="MobTimer" type="Timer" parent="."]
 wait_time = 0.5

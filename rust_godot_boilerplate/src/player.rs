@@ -8,6 +8,7 @@ use godot::classes::ICharacterBody3D;
 pub struct Player {
     speed: f32,
     fall_acceleration: f32,
+    jump_impulse: f32,
     target_velocity: Vector3,
 
     base: Base<CharacterBody3D>
@@ -19,6 +20,7 @@ impl ICharacterBody3D for Player {
         Self {
             speed: 14.0,
             fall_acceleration: 75.0,
+            jump_impulse: 20.0,
             target_velocity: Vector3::ZERO,
             base
         }
@@ -46,7 +48,6 @@ impl ICharacterBody3D for Player {
 
         if input.is_action_pressed("move_forward") {
             direction += Vector3::FORWARD;
-            godot_print!("move_forward");
         }
 
         if input.is_action_pressed("move_back") {
@@ -73,6 +74,10 @@ impl ICharacterBody3D for Player {
         //moving the Character
         let velocity = self.target_velocity; 
         self.base_mut().set_velocity(velocity);
+        //jumping
+        if self.base().is_on_floor() && input.is_action_just_pressed("jump") {
+            self.target_velocity.y = self.jump_impulse;
+        }
         self.base_mut().move_and_slide();
         
     }

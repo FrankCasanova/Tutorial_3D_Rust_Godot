@@ -6,6 +6,8 @@
 size = Vector3(1.40546, 1.45325, 1.70323)
 
 [node name="Mob" type="Mob"]
+collision_layer = 2
+collision_mask = 0
 
 [node name="Pivot" type="Node3D" parent="."]
 
