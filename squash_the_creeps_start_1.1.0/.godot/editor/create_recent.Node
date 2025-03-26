@@ -1,5 +1,7 @@
-UserInterface
+AudioStreamPlayer
 Label
+ColorRect
+UserInterface
 Control
 CollisionShape3D
 Area3D
@@ -11,5 +13,3 @@ PathFollow3D
 Mob
 VisibleOnScreenNotifier3D
 CharacterBody3D
-Player
-MainScene

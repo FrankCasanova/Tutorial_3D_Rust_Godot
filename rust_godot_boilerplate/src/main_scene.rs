@@ -2,10 +2,12 @@
 use crate::player;
 use crate::mob;
 use crate::scorelabel;
-use crate::scorelabel::UserInterface;
 
 
-use godot::classes::Label;
+
+use godot::classes::ColorRect;
+
+use godot::classes::InputEvent;
 use godot::classes::Timer;
 use godot::prelude::*;
 use godot::classes::PathFollow3D;
@@ -43,6 +45,22 @@ impl INode for MainScene {
     fn ready(&mut self) {
         godot_print!("MainScene ready");
         self.to_gd();
+
+        //$UserInterface/Retry.hide()
+        self.base().get_node_as::<ColorRect>("UserInterface/Retry").hide();
+    }
+    fn unhandled_input(&mut self, event: Gd<InputEvent>) {
+        
+        //if event.is_action_pressed("ui_accept") and $UserInterface/Retry.visible:
+        if event.is_action_pressed("ui_accept")
+            && self
+                .base()
+                .get_node_as::<ColorRect>("UserInterface/Retry")
+                .is_visible()
+
+        {   //get_tree().reload_current_scene()
+            self.base().get_tree().unwrap().reload_current_scene();
+        }
     }
 }
 #[godot_api]
@@ -86,5 +104,8 @@ impl MainScene {
     pub fn on_player_hit(&mut self) {
         //$MobTimer.stop()
         self.mob_timer.stop();
+        
+        //$UserInterface/Retry.show()
+        self.base().get_node_as::<ColorRect>("UserInterface/Retry").show();
     }
 }
