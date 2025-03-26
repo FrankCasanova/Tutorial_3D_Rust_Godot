@@ -1,3 +1,4 @@
+mod scorelabel;
 mod mob;
 use godot::prelude::*;
 

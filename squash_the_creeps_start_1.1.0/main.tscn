@@ -1,6 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://b70g8epauqibi"]
+[gd_scene load_steps=9 format=3 uid="uid://b70g8epauqibi"]
 
 [ext_resource type="PackedScene" uid="uid://bvlv4saytitbk" path="res://player.tscn" id="1_ig7tw"]
+[ext_resource type="FontFile" uid="uid://dl270v4sovdki" path="res://fonts/Montserrat-Medium.ttf" id="2_0xm2m"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_7dm0k"]
 size = Vector3(60, 2, 60)
@@ -21,6 +22,10 @@ _data = {
 "tilts": PackedFloat32Array(0, 0, 0, 0)
 }
 point_count = 4
+
+[sub_resource type="Theme" id="Theme_h2yge"]
+default_font = ExtResource("2_0xm2m")
+default_font_size = 22
 
 [node name="Main" type="MainScene"]
 
@@ -80,4 +85,18 @@ transform = Transform3D(0.0339328, 0, -0.999424, 0, 1, 0, 0.999424, 0, 0.0339328
 wait_time = 0.5
 autostart = true
 
+[node name="UserInterface" type="UserInterface" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+theme = SubResource("Theme_h2yge")
+
+[node name="ScoreLabel" type="Label" parent="UserInterface"]
+offset_left = 37.0
+offset_top = 45.0
+offset_right = 98.0
+offset_bottom = 68.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Score: 0"
+
+[connection signal="hit" from="Player" to="." method="on_player_hit"]
 [connection signal="timeout" from="MobTimer" to="." method="on_mob_timer_timeout"]

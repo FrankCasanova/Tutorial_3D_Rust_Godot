@@ -1,3 +1,8 @@
+UserInterface
+Label
+Control
+CollisionShape3D
+Area3D
 Timer
 Path3D
 MeshInstance3D
@@ -5,11 +10,6 @@ Node3D
 PathFollow3D
 Mob
 VisibleOnScreenNotifier3D
-CollisionShape3D
 CharacterBody3D
 Player
 MainScene
-Camera3D
-Marker3D
-DirectionalLight3D
-StaticBody3D

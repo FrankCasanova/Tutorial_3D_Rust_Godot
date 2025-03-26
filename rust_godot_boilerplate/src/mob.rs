@@ -16,7 +16,7 @@ pub struct Mob {
 #[godot_api]
 impl ICharacterBody3D for Mob {
     fn init(base: Base<CharacterBody3D>) -> Self {
-        godot_print!("Mob initialized");
+        // godot_print!("Mob initialized");
         Self {
             min_speed: 10.0,
             max_speed: 18.0, 

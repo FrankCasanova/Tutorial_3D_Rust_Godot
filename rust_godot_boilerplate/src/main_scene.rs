@@ -1,8 +1,12 @@
 
 use crate::player;
 use crate::mob;
+use crate::scorelabel;
+use crate::scorelabel::UserInterface;
 
-use godot::classes::CharacterBody3D;
+
+use godot::classes::Label;
+use godot::classes::Timer;
 use godot::prelude::*;
 use godot::classes::PathFollow3D;
 use rand::Rng;
@@ -15,6 +19,8 @@ use rand::Rng;
 pub struct MainScene {
     mob_scene: OnReady<Gd<PackedScene>>,
     player: OnReady<Gd<player::Player>>,
+    mob_timer: OnReady<Gd<Timer>>,
+    user_interface: OnReady<Gd<scorelabel::UserInterface>>,
     base: Base<Node>,
 }
 
@@ -28,6 +34,8 @@ impl INode for MainScene {
             // OnReady::from_loaded(path) == OnReady::new(|| tools::load(path)).
             mob_scene: OnReady::from_loaded("res://mob.tscn"),
             player: OnReady::from_node("Player"),
+            mob_timer: OnReady::from_node("MobTimer"),
+            user_interface: OnReady::from_node("UserInterface"),
             base,
         }
     }
@@ -43,6 +51,8 @@ impl MainScene {
     fn on_mob_timer_timeout(&mut self) {
         // Create mob instance
         // Get spawn location (fixed typo in variable name)
+
+
 
         // var mob_spawn_location = get_node("SpawnPath/SpawnLocation")
         let mut mob_spawn_location = self.base().get_node_as::<PathFollow3D>("SpawnPath/SpawnLocation");
@@ -61,7 +71,20 @@ impl MainScene {
         // mob.initialize(mob_spawn_location.position, player_position)
         mob.bind_mut().initialize(mob_spawn_location.get_position(), player_position);
 
+        
+        //mob.squashed.connect($UserInterface/ScoreLabel._on_mob_squashed.bind())
+        mob.connect("squashed", &mut self.user_interface.callable("on_mob_squashed").bind(&[]));	
+        
+        
+
+        
         // add_child(mob)
         self.base_mut().add_child(&mob);
+    }
+
+    #[func]
+    pub fn on_player_hit(&mut self) {
+        //$MobTimer.stop()
+        self.mob_timer.stop();
     }
 }

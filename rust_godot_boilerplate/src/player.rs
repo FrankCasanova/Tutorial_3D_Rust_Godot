@@ -1,3 +1,4 @@
+use godot::classes::CollisionShape3D;
 use godot::prelude::*;
 use godot::classes::CharacterBody3D;
 use godot::classes::ICharacterBody3D;
@@ -118,3 +119,30 @@ impl ICharacterBody3D for Player {
 }
 
 
+#[godot_api]
+impl Player {
+
+    //signal hit
+    #[signal]
+    pub fn hit();
+
+
+
+    #[func]
+    pub fn die(&mut self) {
+        //hit.emit()
+        self.signals().hit().emit();
+        //queue_free()
+        self.base_mut().queue_free();
+    }
+
+    #[func]
+    pub fn on_mob_detector_body_entered(&mut self, _body: Gd<CharacterBody3D>) {
+
+        let mut collision_shape = self.base().get_node_as::<CollisionShape3D>("CollisionShape3D");
+        collision_shape.set_deferred("disabled", &true.to_variant());
+        //die()
+        self.die();
+    }
+    
+}
