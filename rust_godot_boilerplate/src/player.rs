@@ -1,9 +1,11 @@
+use godot::classes::AnimationPlayer;
 use godot::classes::CollisionShape3D;
 use godot::prelude::*;
 use godot::classes::CharacterBody3D;
 use godot::classes::ICharacterBody3D;
 use crate::mob::Mob;
 
+use std::f32::consts::FRAC_PI_6;
 
 #[derive(GodotClass)]
 #[class(base=CharacterBody3D)]
@@ -64,6 +66,13 @@ impl ICharacterBody3D for Player {
             let mut pivot= self.base_mut().get_node_as::<Node3D>("Pivot");
             //$Pivot.basis = Basis.looking_at(direction) (GDScript)
             pivot.set_basis(Basis::looking_at(-direction, Vector3::UP, true));
+            self.base()
+                .get_node_as::<AnimationPlayer>("AnimationPlayer")
+                .set_speed_scale(4.0);
+        } else {
+            self.base()
+               .get_node_as::<AnimationPlayer>("AnimationPlayer")
+               .set_speed_scale(1.0); 
         }
 
         // Ground Velocity
@@ -114,6 +123,10 @@ impl ICharacterBody3D for Player {
             
         }
         self.base_mut().move_and_slide();
+        let mut pivot = self.base().get_node_as::<Node3D>("Pivot");
+        let mut pivot_rotation = pivot.get_rotation();
+        pivot_rotation.x = FRAC_PI_6 * self.base().get_velocity().y / self.jump_impulse;
+        pivot.set_rotation(pivot_rotation);
         
     }
 }

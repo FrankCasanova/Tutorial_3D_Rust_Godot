@@ -1,3 +1,4 @@
+AnimationPlayer
 AudioStreamPlayer
 Label
 ColorRect
@@ -12,4 +13,3 @@ Node3D
 PathFollow3D
 Mob
 VisibleOnScreenNotifier3D
-CharacterBody3D
