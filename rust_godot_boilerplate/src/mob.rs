@@ -31,6 +31,15 @@ impl ICharacterBody3D for Mob {
 #[godot_api]
 impl Mob {
 
+    #[signal]
+    pub fn squashed();
+
+    #[func]
+    pub fn squash(&mut self){
+        self.signals().squashed().emit();
+        self.base_mut().queue_free();
+    }
+
     #[func]
     fn on_visible_on_screen_notifier_3d_screen_exited(&mut self) {
         self.base_mut().queue_free();

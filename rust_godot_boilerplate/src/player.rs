@@ -3,6 +3,7 @@ use godot::classes::CharacterBody3D;
 use godot::classes::ICharacterBody3D;
 use crate::mob::Mob;
 
+
 #[derive(GodotClass)]
 #[class(base=CharacterBody3D)]
 pub struct Player {
@@ -92,8 +93,11 @@ impl ICharacterBody3D for Player {
                 if let Some(node) = collider.try_cast::<Node3D>().ok() {
                     if node.is_in_group("mob") {
                         //var mob = collision.get_collider()
-                        let mob = collision.get_collider().unwrap().cast::<Mob>();
+                        let mut mob = collision.get_collider().unwrap().cast::<Mob>();
+                        //if Vector3.UP.dot(collision.get_normal()) > 0.1:
                         if Vector3::UP.dot(collision.get_normal()) > 0.1 {
+                            //mob.squash()
+                            mob.call("squash", &[]);
                             //velocity.y = bounce_impulse
                             self.target_velocity.y = self.bounce_impulse;
                             break;
