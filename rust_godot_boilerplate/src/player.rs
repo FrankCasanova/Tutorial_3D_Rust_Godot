@@ -97,7 +97,7 @@ impl ICharacterBody3D for Player {
                         //if Vector3.UP.dot(collision.get_normal()) > 0.1:
                         if Vector3::UP.dot(collision.get_normal()) > 0.1 {
                             //mob.squash()
-                            mob.call("squash", &[]);
+                            mob.bind_mut().squash();
                             //velocity.y = bounce_impulse
                             self.target_velocity.y = self.bounce_impulse;
                             break;
