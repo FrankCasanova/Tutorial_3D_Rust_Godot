@@ -5,7 +5,7 @@
 [sub_resource type="BoxShape3D" id="BoxShape3D_nokgg"]
 size = Vector3(1.40546, 1.45325, 1.70323)
 
-[node name="Mob" type="Mob"]
+[node name="Mob" type="Mob" groups=["mob"]]
 collision_layer = 2
 collision_mask = 0
 
