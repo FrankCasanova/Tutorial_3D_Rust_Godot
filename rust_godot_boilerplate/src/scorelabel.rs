@@ -1,4 +1,4 @@
-use godot::classes::label;
+
 use godot::classes::Label;
 use godot::prelude::*;
 use godot::classes::Control;
