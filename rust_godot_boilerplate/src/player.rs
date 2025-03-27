@@ -107,11 +107,11 @@ impl ICharacterBody3D for Player {
             //velocity.y += jump_impulse
             self.target_velocity.y = self.jump_impulse;
         }
-        
+
         //We apply gravity every frame so the character always collides with the ground when moving.
         //This is necessary for the is_on_floor() function to work as a body can always detect
         //the floor, walls, etc. when a collision happens the same frame.
-        
+
         if !self.base().is_on_floor() {
             //velocity.y -= fall_acceleration * delta
             self.target_velocity.y -= self.fall_acceleration * _delta as f32;
@@ -121,7 +121,7 @@ impl ICharacterBody3D for Player {
         self.base_mut().set_velocity(velocity);
         //move_and_slide()
         self.base_mut().move_and_slide();
-        
+
         //Here, we check if we landed on top of a mob and if so, we kill it and bounce.
         //With move_and_slide(), Godot makes the body move sometimes multiple times in a row to
         //smooth out the character's motion. So we have to loop over all collisions that may have
@@ -143,13 +143,15 @@ impl ICharacterBody3D for Player {
                             mob.bind_mut().squash();
                             //velocity.y = bounce_impulse
                             self.target_velocity.y = self.bounce_impulse;
+                            //Prevent this block from running more than once,
+                            //which would award the player more than 1 point for squashing a single mob.
                             break;
                         }
                     }
                 }
             }
         }
-
+        //This makes the character follow a nice arc when jumping
         //$Pivot.rotation.x = PI / 6 * velocity.y / jump_impulse
         let mut pivot = self.base().get_node_as::<Node3D>("Pivot");
         let mut pivot_rotation = pivot.get_rotation();
