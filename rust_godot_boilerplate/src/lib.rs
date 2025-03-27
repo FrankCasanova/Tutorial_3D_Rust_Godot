@@ -1,10 +1,9 @@
-mod scorelabel;
 mod mob;
+mod scorelabel;
 use godot::prelude::*;
 
-mod player;
 mod main_scene;
-
+mod player;
 
 struct Scripts;
 

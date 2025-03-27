@@ -1,19 +1,14 @@
-
-use crate::player;
 use crate::mob;
+use crate::player;
 use crate::scorelabel;
-
-
 
 use godot::classes::ColorRect;
 
 use godot::classes::InputEvent;
+use godot::classes::PathFollow3D;
 use godot::classes::Timer;
 use godot::prelude::*;
-use godot::classes::PathFollow3D;
 use rand::Rng;
-
-
 
 // Deriving GodotClass makes the class available to Godot.
 #[derive(GodotClass)]
@@ -47,18 +42,19 @@ impl INode for MainScene {
         self.to_gd();
 
         //$UserInterface/Retry.hide()
-        self.base().get_node_as::<ColorRect>("UserInterface/Retry").hide();
+        self.base()
+            .get_node_as::<ColorRect>("UserInterface/Retry")
+            .hide();
     }
     fn unhandled_input(&mut self, event: Gd<InputEvent>) {
-        
         //if event.is_action_pressed("ui_accept") and $UserInterface/Retry.visible:
         if event.is_action_pressed("ui_accept")
             && self
                 .base()
                 .get_node_as::<ColorRect>("UserInterface/Retry")
                 .is_visible()
-
-        {   //get_tree().reload_current_scene()
+        {
+            //get_tree().reload_current_scene()
             self.base().get_tree().unwrap().reload_current_scene();
         }
     }
@@ -70,10 +66,10 @@ impl MainScene {
         // Create mob instance
         // Get spawn location (fixed typo in variable name)
 
-
-
         // var mob_spawn_location = get_node("SpawnPath/SpawnLocation")
-        let mut mob_spawn_location = self.base().get_node_as::<PathFollow3D>("SpawnPath/SpawnLocation");
+        let mut mob_spawn_location = self
+            .base()
+            .get_node_as::<PathFollow3D>("SpawnPath/SpawnLocation");
 
         // Set random progress using proper rng
 
@@ -87,15 +83,15 @@ impl MainScene {
         let mut mob = self.mob_scene.instantiate_as::<mob::Mob>();
 
         // mob.initialize(mob_spawn_location.position, player_position)
-        mob.bind_mut().initialize(mob_spawn_location.get_position(), player_position);
+        mob.bind_mut()
+            .initialize(mob_spawn_location.get_position(), player_position);
 
-        
         //mob.squashed.connect($UserInterface/ScoreLabel._on_mob_squashed.bind())
-        mob.connect("squashed", &mut self.user_interface.callable("on_mob_squashed").bind(&[]));	
-        
-        
+        mob.connect(
+            "squashed",
+            &mut self.user_interface.callable("on_mob_squashed").bind(&[]),
+        );
 
-        
         // add_child(mob)
         self.base_mut().add_child(&mob);
     }
@@ -104,8 +100,10 @@ impl MainScene {
     pub fn on_player_hit(&mut self) {
         //$MobTimer.stop()
         self.mob_timer.stop();
-        
+
         //$UserInterface/Retry.show()
-        self.base().get_node_as::<ColorRect>("UserInterface/Retry").show();
+        self.base()
+            .get_node_as::<ColorRect>("UserInterface/Retry")
+            .show();
     }
 }
