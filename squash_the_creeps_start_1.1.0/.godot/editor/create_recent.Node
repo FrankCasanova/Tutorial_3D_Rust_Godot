@@ -12,4 +12,3 @@ MeshInstance3D
 Node3D
 PathFollow3D
 Mob
-VisibleOnScreenNotifier3D

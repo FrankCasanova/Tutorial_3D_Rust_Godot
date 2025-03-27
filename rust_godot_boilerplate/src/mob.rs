@@ -1,3 +1,4 @@
+use godot::classes::AnimationPlayer;
 use godot::prelude::*;
 use godot::classes::CharacterBody3D;
 use godot::classes::ICharacterBody3D;
@@ -63,6 +64,10 @@ impl Mob {
         let rotation = self.base().get_rotation();
         let velocity = self.base().get_velocity();
         self.base_mut().set_velocity(velocity.rotated(Vector3::UP, rotation.y));
+        let animation_speed = rand::rng().random_range(1.0..6.0);
+        self.base()
+            .get_node_as::<AnimationPlayer>("AnimationPlayer")
+            .set_speed_scale(animation_speed as f32)
     }
 
 }

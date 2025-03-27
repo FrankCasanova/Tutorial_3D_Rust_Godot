@@ -123,6 +123,8 @@ impl ICharacterBody3D for Player {
             
         }
         self.base_mut().move_and_slide();
+
+        //$Pivot.rotation.x = PI / 6 * velocity.y / jump_impulse
         let mut pivot = self.base().get_node_as::<Node3D>("Pivot");
         let mut pivot_rotation = pivot.get_rotation();
         pivot_rotation.x = FRAC_PI_6 * self.base().get_velocity().y / self.jump_impulse;
