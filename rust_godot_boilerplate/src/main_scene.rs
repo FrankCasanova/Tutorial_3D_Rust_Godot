@@ -3,7 +3,6 @@ use crate::player;
 use crate::scorelabel;
 
 use godot::classes::ColorRect;
-
 use godot::classes::InputEvent;
 use godot::classes::PathFollow3D;
 use godot::classes::Timer;
@@ -11,9 +10,11 @@ use godot::prelude::*;
 use rand::Rng;
 
 // Deriving GodotClass makes the class available to Godot.
+//extends Node
 #[derive(GodotClass)]
 #[class(base=Node)]
 pub struct MainScene {
+    //@export var mob_scene: PackedScene
     mob_scene: OnReady<Gd<PackedScene>>,
     player: OnReady<Gd<player::Player>>,
     mob_timer: OnReady<Gd<Timer>>,
@@ -25,10 +26,7 @@ pub struct MainScene {
 impl INode for MainScene {
     fn init(base: Base<Node>) -> Self {
         godot_print!("MainScene initialized");
-        // We could also initialize those manually inside ready(), but OnReady automatically defers initialization.
-        // Alternatively to init(), you can use #[init(...)] on the struct fields.
         Self {
-            // OnReady::from_loaded(path) == OnReady::new(|| tools::load(path)).
             mob_scene: OnReady::from_loaded("res://mob.tscn"),
             player: OnReady::from_node("Player"),
             mob_timer: OnReady::from_node("MobTimer"),
@@ -38,7 +36,6 @@ impl INode for MainScene {
     }
 
     fn ready(&mut self) {
-        godot_print!("MainScene ready");
         self.to_gd();
 
         //$UserInterface/Retry.hide()
@@ -54,6 +51,7 @@ impl INode for MainScene {
                 .get_node_as::<ColorRect>("UserInterface/Retry")
                 .is_visible()
         {
+            //warning-ignore:return_value_discarded
             //get_tree().reload_current_scene()
             self.base().get_tree().unwrap().reload_current_scene();
         }
@@ -64,28 +62,23 @@ impl MainScene {
     #[func]
     fn on_mob_timer_timeout(&mut self) {
         // Create mob instance
-        // Get spawn location (fixed typo in variable name)
-
         // var mob_spawn_location = get_node("SpawnPath/SpawnLocation")
         let mut mob_spawn_location = self
             .base()
             .get_node_as::<PathFollow3D>("SpawnPath/SpawnLocation");
 
+        //Choose a random location on the SpawnPath.
         // Set random progress using proper rng
-
         // mob_spawn_location.progress_ratio = randf()
         mob_spawn_location.set_progress_ratio(rand::rng().random_range(0.0..=1.0));
-
+        // Communicate the spawn location and the player's location to the mob.
         //var player_position = $Player.position
         let player_position = self.player.get_position();
-
         // var mob = mob_scene.instantiate()
         let mut mob = self.mob_scene.instantiate_as::<mob::Mob>();
-
         // mob.initialize(mob_spawn_location.position, player_position)
         mob.bind_mut()
             .initialize(mob_spawn_location.get_position(), player_position);
-
         //mob.squashed.connect($UserInterface/ScoreLabel._on_mob_squashed.bind())
         mob.connect(
             "squashed",
@@ -100,7 +93,6 @@ impl MainScene {
     pub fn on_player_hit(&mut self) {
         //$MobTimer.stop()
         self.mob_timer.stop();
-
         //$UserInterface/Retry.show()
         self.base()
             .get_node_as::<ColorRect>("UserInterface/Retry")
