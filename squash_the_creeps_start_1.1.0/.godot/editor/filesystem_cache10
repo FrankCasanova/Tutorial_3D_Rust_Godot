@@ -1,13 +1,13 @@
 ea4bc82a6ad023ab7ee23ee620429895
-::res://::1743081086
+::res://::1743085641
 default_bus_layout.tres::AudioBusLayout/AudioBusLayout::-1::1742936663::0::1::::<><><>0<>0<><>::
 default_env.tres::Environment/Environment::-1::1742936663::0::1::::<><><>0<>0<><>::
 icon.png::CompressedTexture2D/CompressedTexture2D::7164329318770678222::1742936663::1742936708::1::::<><><>0<>0<>e8f4f906b44b35f72d7dce5a70d52833<>res://.godot/imported/icon.png-487276ed1e3a0c39cad0279d744ee560.ctex::
-main.tscn::PackedScene::4684496590409923786::1743081052::0::1::::<><><>0<>0<><>::uid://bvlv4saytitbk::::res://player.tscn<>uid://dl270v4sovdki::::res://fonts/Montserrat-Medium.ttf
-mob.tscn::PackedScene::8934013187376652051::1743081052::0::1::::<><><>0<>0<><>::uid://or56hj80wrrn::::res://art/mob.glb
-music_player.tscn::PackedScene::3062225250499634238::1743081052::0::1::::<><><>0<>0<><>::uid://de3ihy6kdsw2x::::res://art/House In a Forest Loop.ogg
-player.tscn::PackedScene::3884422346794255976::1743081052::0::1::::<><><>0<>0<><>::uid://ddyx1ju3dch3p::::res://art/player.glb
-RustScripts.gdextension::GDExtension/GDExtension::66723538550132756::1742936663::0::1::::<><><>0<>0<><>::
+main.tscn::PackedScene::4684496590409923786::1743084958::0::1::::<><><>0<>0<><>::uid://bvlv4saytitbk::::res://player.tscn<>uid://dl270v4sovdki::::res://fonts/Montserrat-Medium.ttf
+mob.tscn::PackedScene::8934013187376652051::1743084958::0::1::::<><><>0<>0<><>::uid://or56hj80wrrn::::res://art/mob.glb
+music_player.tscn::PackedScene::3062225250499634238::1743084958::0::1::::<><><>0<>0<><>::uid://de3ihy6kdsw2x::::res://art/House In a Forest Loop.ogg
+player.tscn::PackedScene::3884422346794255976::1743084958::0::1::::<><><>0<>0<><>::uid://ddyx1ju3dch3p::::res://art/player.glb
+RustScripts.gdextension::GDExtension::66723538550132756::1743085599::0::1::::<><><>0<>0<><>::
 ::res://art/::1743031430
 body.material::StandardMaterial3D/StandardMaterial3D::-1::1742936663::0::1::::<><><>0<>0<><>::
 eye.material::StandardMaterial3D/StandardMaterial3D::-1::1742936663::0::1::::<><><>0<>0<><>::
